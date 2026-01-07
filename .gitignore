@@ -1,0 +1,37 @@
+# Gradle
+.gradle
+/build/
+/out/
+.gradle-enterprise
+.idea/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.log
+/src/main/resources/application*.yml # 개발용 설정 파일 등
+/src/main/resources/application*.properties
+
+# macOS
+.DS_Store
+
+# IDE (IntelliJ IDEA)
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# IDE (Eclipse)
+.classpath
+.project
+.settings/
+*.launch
+*.sublime-workspace
+
+# VS Code
+.vscode/
