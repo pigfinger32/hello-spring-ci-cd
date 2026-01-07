@@ -1,0 +1,35 @@
+# appspec.yml (프로젝트 루트 디렉토리)
+version: 0.0
+os: linux 
+
+files: 
+  - source: / 
+    destination: /home/ec2-user/deploy/hello-spring # TODO: EC2 사용자명과 프로젝트명에 맞게 조정 (예: /home/ubuntu/deploy/hello-spring)
+    overwrite: yes 
+
+file_exists_behavior: OVERWRITE 
+
+permissions: 
+  - object: /home/ec2-user/deploy/hello-spring # TODO: destination 경로와 일치
+    pattern: "**" 
+    owner: ec2-user # TODO: EC2 접속 사용자명 (예: ec2-user, ubuntu 등)
+    group: ec2-user # TODO: EC2 접속 사용자명 그룹 (예: ec2-user, ubuntu 등)
+    mode: 755 
+
+hooks: 
+  ApplicationStop: 
+    - location: scripts/deploy.sh # 압축 파일 내 'scripts/deploy.sh' 실행
+      timeout: 60 
+      runas: root 
+  AfterInstall: 
+    - location: scripts/deploy.sh 
+      timeout: 60
+      runas: root
+  ApplicationStart: 
+    - location: scripts/deploy.sh
+      timeout: 180 
+      runas: root
+  ValidateService: 
+    - location: scripts/deploy.sh
+      timeout: 180
+      runas: root
