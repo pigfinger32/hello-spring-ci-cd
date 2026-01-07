@@ -4,12 +4,12 @@ name: Hello Spring Boot CI/CD to AWS EC2 with CodeDeploy
 on:
   push:
     branches:
-      - master # <--- 이 부분을 master로 변경했습니다.
+      - master # 여러분의 기본 브랜치 이름에 맞게 'master' 또는 'main'으로 변경
 
 env:
-  S3_BUCKET_NAME: my-hello-spring-codedeploy-artifacts-jhlee517 # TODO: 3-1단계에서 생성한 S3 버킷 이름
-  CODE_DEPLOY_APPLICATION_NAME: hello-spring-app # TODO: 3-4단계에서 생성한 CodeDeploy 애플리케이션 이름
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: hello-spring-deployment-group # TODO: 3-4단계에서 생성한 CodeDeploy 배포 그룹 이름
+  S3_BUCKET_NAME: my-hello-spring-codedeploy-artifacts-jhlee517 # TODO: 3-1단계에서 생성한 S3 버킷 이름 (예시)
+  CODE_DEPLOY_APPLICATION_NAME: hello-spring-app # TODO: 3-4단계에서 생성한 CodeDeploy 애플리케이션 이름 (예시)
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: hello-spring-deployment-group # TODO: 3-4단계에서 생성한 CodeDeploy 배포 그룹 이름 (예시)
   AWS_REGION: ap-northeast-2 # 여러분의 AWS 리전 (예: ap-northeast-2)
 
 jobs:
@@ -20,17 +20,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 11
+      - name: Set up JDK 17 # Java 버전을 17로 변경했습니다.
         uses: actions/setup-java@v4
         with:
-          java-version: '11'
-          distribution: 'temurin'
+          java-version: "17" # <--- 이 부분을 17로 변경
+          distribution: "temurin" # OpenJDK 배포판 중 'Temurin'을 사용합니다.
 
-      - name: Grant execute permission for gradlew
+      - name: Grant execute permission for gradlew # gradlew 스크립트에 실행 권한을 부여합니다.
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew clean build -x test
+      - name: Build with Gradle # Spring Boot 애플리케이션을 Gradle을 사용하여 빌드합니다.
+        run: ./gradlew clean build -x test # 테스트(test) 단계는 건너뛰고 빌드합니다.
 
       # --- AWS 자격 증명 설정 (GitHub Secrets에서 가져옴) ---
       - name: Configure AWS credentials
