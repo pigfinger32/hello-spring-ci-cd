@@ -11,6 +11,7 @@ public class HelloController {
 		return "Hello, World from Spring Boot!";
 	}
 	
+	//index 루트
 	@GetMapping("/")
 	public String home() {
 		return "Welcome to Spring Boot Hello App!";
