@@ -12,6 +12,7 @@ public class HelloController {
 	}
 	
 	//index 루트
+	//index 배포 재시도
 	@GetMapping("/")
 	public String home() {
 		return "Welcome to Spring Boot Hello App!";
